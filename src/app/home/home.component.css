@@ -1,0 +1,7 @@
+.page-link {
+   cursor: pointer;
+}
+
+.selected {
+  color: #0056b3 !important;
+}
