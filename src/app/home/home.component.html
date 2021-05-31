@@ -3,43 +3,29 @@
 
 </header>
 
-<div class="container main-container">
+<div class="container main-container" >
   <div class="row text-center" >
 
-    <div class="col-lg-3 col-md-6 mb-4"  *ngFor="let banco of lstBancoPaged" >
+    <div class="col-lg-6 col-md-6 mb-6"  *ngFor="let human of lstHumansByDimensionsPaged" >
       <div class="card h-100">
         <img class="card-img-top" src="/assets/crossplat.jpg" height="164px" width="253px" alt="">
         <div class="card-body">
-          <h4 class="card-title">{{banco.tiulo}}</h4>
+          <h4 class="card-title">{{human.name}}</h4>
+          <h4 class="card-title" *ngIf="human.partnerName">{{'& ' + human.partnerName}}</h4>
+          <h4 class="card-title" *ngIf="human.partnerName">{{'From ' + human.dimentionName}}</h4>
 
         </div>
         <div class="card-footer">
-          <a href="#" class="btn btn-primary">Saiba mais</a>
+          <a [routerLink]="['/human-detail',human.id]"  class="btn btn-primary">Detalhes</a>
         </div>
       </div>
     </div>
 
 
-    <div  style="margin: 50px; width: 100%;">
+    <div  style="margin: 25px; width: 100%;">
 
       <app-pagination-cards #paginationCardsComponent></app-pagination-cards>
 
- <!--   <nav>
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-          </li>
-          <li class="page-item "><a [ngClass]="classnumber(1)" (click)="changePage(2)"  >1</a></li>
-          <li class="page-item"><a [ngClass]="classnumber(2)" (click)="changePage(2)">2</a></li>
-          <li class="page-item"><a class="page-link" (click)="changePage(3)">3</a></li>
-          <li class="page-item"><a class="page-link" (click)="changePage(4)">4</a></li>
-          <li class="page-item"><a class="page-link" (click)="changePage(5)">5</a></li>
-          <li class="page-item"><a class="page-link" (click)="changePage(6)">6</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
-        </ul>
-      </nav> -->
     </div>
   </div>
 

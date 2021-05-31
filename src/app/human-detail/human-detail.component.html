@@ -1,0 +1,30 @@
+<header class="bg-primary py-5 mb-5">
+
+</header>
+
+<div class="container main-container" style="display: flex;
+align-items: center;
+justify-content: center;" *ngIf="this.humansByDimensions !== null">
+  <div class="row text-center">
+
+    <div>
+      <div class="card h-100">
+        <h4 class="card-title">{{'Este são o detalhes de ' + this.humansByDimensions.name
+          + ' pertencente a dimensão:'}} </h4>
+
+        <h4>{{this.humansByDimensions.dimentionName}}</h4>
+
+        <div class="card-footer" *ngIf="this.humansByDimensions.travelHistories != null && this.humansByDimensions.travelHistories.length > 0">
+          <a href="javascript:;"  (click)="showTravels()"    class="btn btn-primary">Histórico de viagens</a>
+        </div>
+        <div class="card-footer">
+          <a   href="javascript:;" (click)="showModalSaveTravel()"  class="btn btn-primary">Registrar viagens</a>
+        </div>
+        <div class="card-footer">
+          <a [routerLink]="['/home']" class="btn btn-primary">Voltar</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

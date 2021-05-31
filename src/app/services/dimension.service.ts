@@ -15,30 +15,20 @@ import TravelHistoryViewModel from "../models/travel-history.view-model";
 
 
 @Injectable()
-export class HumansByDimensionsService {
+export class DimensionService {
   //: Person = new Person;person
 
   constructor(
     protected http: HttpClient
   ) { }
 
-  getByDimension(id: number):  any {
+  getAll():  any {
 
-    return this.http.get('https://localhost:5001/HumansByDimensions/GetResponsableHumanOriginalDimension/' + id);
-
-  }
-
-  getHumanDetail(id: number):  any {
-
-    return this.http.get('https://localhost:5001/HumansByDimensions/GetHumanOriginalDimensionWithTravels/' + id);
+    return this.http.get('https://localhost:5001/Dimention/GelAll');
 
   }
 
-  saveTravel(data: TravelHistoryViewModel):  any {
 
-    return this.http.post('https://localhost:5001/TravelHistory/Save', data);
-
-  }
 
 
 }

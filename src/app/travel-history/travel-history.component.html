@@ -1,0 +1,25 @@
+<header>
+  <div class="d-flex justify-content-between" style="margin-bottom: 24px;">
+    <div class="flex-grow-1">
+      <h2>Histórico de viagens</h2>
+    </div>
+
+  </div>
+</header>
+<div class="container-local">
+
+  <table id="travel">
+    <tr>
+      <th>Dimensão</th>
+      <th>Data</th>
+    </tr>
+    <tr *ngFor="let tevael of lstTravels" >
+      <td>{{tevael.dimensionName}}</td>
+      <td>{{tevael.travelDate}}</td>
+    </tr>
+
+  </table>
+  <div class="card-footer" style="text-align: center;">
+    <a  (click)="close()" href="javascript:;"  class="btn btn-primary">Fechar</a>
+  </div>
+</div>

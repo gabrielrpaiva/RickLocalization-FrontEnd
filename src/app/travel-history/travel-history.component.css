@@ -1,0 +1,24 @@
+#travel {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#travel td, #travel th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+#travel tr:nth-child(even){background-color: #f2f2f2;}
+
+#travel tr:hover {background-color: #ddd;}
+
+#travel th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #0056b3;
+  color: white;
+  text-align: center;
+}

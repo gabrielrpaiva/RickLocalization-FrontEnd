@@ -1,0 +1,29 @@
+
+
+<div class="container main-container" style="display: flex;
+align-items: center;
+justify-content: center;"  >
+
+  <div class="row text-center">
+
+    <div>
+      <h2>Registrar viagens</h2>
+      <div class="card h-100">
+
+        <div>
+          <form [formGroup]="dimensionsForm" novalidate autocomplete="off">
+            <select formControlName="dimensionId">
+              <option *ngFor="let dimension of this.lstDimensions" value="{{ dimension.id }}">
+                {{ dimension.name }}
+              </option>
+            </select>
+          </form>
+
+       </div>
+       <div class="card-footer" *ngIf="this.dimensionsForm.get('dimensionId')?.value">
+        <a href="javascript:;" (click)="save()" class="btn btn-primary">Salvar</a>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

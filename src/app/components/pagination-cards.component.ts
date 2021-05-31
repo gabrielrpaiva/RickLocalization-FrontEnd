@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { BancoViewModel } from '../home/BancoViewModel';
+import { ActivatedRoute } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
+import HumansByDimensionsViewModel from '../models/humans-by-dimensions.view-model';
 import { HumansByDimensionsService } from '../services/humans-by-dimensions.service';
 
 @Component({
@@ -13,22 +14,29 @@ import { HumansByDimensionsService } from '../services/humans-by-dimensions.serv
 
 export class PaginationCardsComponent {
 
-  constructor(private humansByDimensionsService: HumansByDimensionsService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private humansByDimensionsService: HumansByDimensionsService) { }
 
-  lstBanco: Array<BancoViewModel> = new Array<BancoViewModel>();
 
-  parentPage: HomeComponent = new HomeComponent(this.humansByDimensionsService);
-  lstBancoPaged: Array<BancoViewModel> = new Array<BancoViewModel>();
-  banco: BancoViewModel = new BancoViewModel({});
+
+  parentPage: HomeComponent = new HomeComponent(this.route, this.humansByDimensionsService);
+
+
   selectedPage: number = 1;
   totalPages: number = 0;
+  totalPagesArray: Array<number> = [];
   ngOnInit() {
+
 
   }
 
   startedPagination(parent: HomeComponent) {
-   this.parentPage = parent;
-   this.totalPages = Math.ceil(this.parentPage.lstBanco.length / 2);
+    console.log("startedPagination");
+    this.parentPage = parent;
+    this.totalPages = Math.ceil(this.parentPage.listHumansByDimensions.length / 2);
+    this.totalPagesArray = Array(this.totalPages).fill(this.totalPages).map((x, i) => i);
+
   }
 
 
@@ -41,15 +49,18 @@ export class PaginationCardsComponent {
   }
 
   changePage(indexPage: number) {
-
+    console.log(indexPage);
     this.selectedPage = indexPage;
 
-   this.parentPage.lstBancoPaged = new Array<BancoViewModel>();
-    return this.parentPage.lstBanco.map((x, index) => {
+    this.parentPage.lstHumansByDimensionsPaged = new Array<HumansByDimensionsViewModel>();
+    return this.parentPage.listHumansByDimensions.map((x, index) => {
+      console.log("index:", index)
       if (index === (indexPage * 2) - 2 || index === (((indexPage * 2) - 1))) {
-        this.parentPage.lstBancoPaged.push(x);
+        console.log("entrou")
+        this.parentPage.lstHumansByDimensionsPaged.push(x);
       }
     })
+
   }
 
 
