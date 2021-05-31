@@ -30,7 +30,7 @@ export class HumanDetailComponent {
   lstDimensions: Array<DimensionViewModel> = new Array<DimensionViewModel>();
   async ngOnInit() {
     await this.getDetail();
-
+    await this.getDimentions();
   }
 
   showTravels() {
@@ -44,19 +44,17 @@ export class HumanDetailComponent {
   }
 
   async getDetail() {
-    this.humansByDimensionsService.getHumanDetail(this.route.snapshot.params.id).subscribe((data: HumansByDimensionsViewModel) => {
+    await this.humansByDimensionsService.getHumanDetail(this.route.snapshot.params.id).toPromise().then((data: HumansByDimensionsViewModel) => {
       this.humansByDimensions = data;
-      this.getDimentions();
-
     })
   }
 
   async getDimentions() {
     this.dimensionService.getAll().subscribe((data: Array<DimensionViewModel>) => {
-
       this.lstDimensions = data.filter(x => x.id !== this.humansByDimensions.idDimension);
     })
   }
+
   showModalSaveTravel() {
 
     const dialogLetter = this.matDialog.open(TravelComponent, {
