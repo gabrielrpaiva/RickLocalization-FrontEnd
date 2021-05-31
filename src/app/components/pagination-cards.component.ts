@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 import HumansByDimensionsViewModel from '../models/humans-by-dimensions.view-model';
 import { HumansByDimensionsService } from '../services/humans-by-dimensions.service';
-
 @Component({
   selector: 'app-pagination-cards',
   templateUrl: './pagination-cards.component.html',
@@ -11,9 +10,7 @@ import { HumansByDimensionsService } from '../services/humans-by-dimensions.serv
 
 })
 
-
 export class PaginationCardsComponent {
-
   constructor(
     private route: ActivatedRoute,
     private humansByDimensionsService: HumansByDimensionsService) { }
@@ -21,22 +18,15 @@ export class PaginationCardsComponent {
 
 
   parentPage: HomeComponent = new HomeComponent(this.route, this.humansByDimensionsService);
-
-
   selectedPage: number = 1;
   totalPages: number = 0;
   totalPagesArray: Array<number> = [];
-  ngOnInit() {
-
-
-  }
+  ngOnInit() { }
 
   startedPagination(parent: HomeComponent) {
-    console.log("startedPagination");
     this.parentPage = parent;
     this.totalPages = Math.ceil(this.parentPage.listHumansByDimensions.length / 2);
     this.totalPagesArray = Array(this.totalPages).fill(this.totalPages).map((x, i) => i);
-
   }
 
 
@@ -49,19 +39,15 @@ export class PaginationCardsComponent {
   }
 
   changePage(indexPage: number) {
-    console.log(indexPage);
+
     this.selectedPage = indexPage;
 
     this.parentPage.lstHumansByDimensionsPaged = new Array<HumansByDimensionsViewModel>();
     return this.parentPage.listHumansByDimensions.map((x, index) => {
-      console.log("index:", index)
+
       if (index === (indexPage * 2) - 2 || index === (((indexPage * 2) - 1))) {
-        console.log("entrou")
         this.parentPage.lstHumansByDimensionsPaged.push(x);
       }
     })
-
   }
-
-
 }

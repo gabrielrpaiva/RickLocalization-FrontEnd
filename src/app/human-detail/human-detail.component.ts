@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 import HumansByDimensionsViewModel from '../models/humans-by-dimensions.view-model';
 import { HumansByDimensionsService } from '../services/humans-by-dimensions.service';
-import {MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { TravelHistoryComponent } from '../travel-history/travel-history.component';
 import TravelHistoryViewModel from '../models/travel-history.view-model';
 import { DimensionService } from '../services/dimension.service';
@@ -21,17 +21,16 @@ import { TravelComponent } from '../travel/travel.component';
 export class HumanDetailComponent {
 
   constructor(
-    private  matDialog: MatDialog,
+    private matDialog: MatDialog,
     private route: ActivatedRoute,
     private humansByDimensionsService: HumansByDimensionsService,
     private dimensionService: DimensionService
-    ) { }
+  ) { }
   humansByDimensions: HumansByDimensionsViewModel = new HumansByDimensionsViewModel({});
   lstDimensions: Array<DimensionViewModel> = new Array<DimensionViewModel>();
   async ngOnInit() {
+    await this.getDetail();
 
-   await this.getDetail();
-await this.getDimentions();
   }
 
   showTravels() {
@@ -45,22 +44,19 @@ await this.getDimentions();
   }
 
   async getDetail() {
-    this.humansByDimensionsService.getHumanDetail(this.route.snapshot.params.id).toPromise().then((data: HumansByDimensionsViewModel)=>{
+    this.humansByDimensionsService.getHumanDetail(this.route.snapshot.params.id).subscribe((data: HumansByDimensionsViewModel) => {
       this.humansByDimensions = data;
-      console.log(this.humansByDimensions)
-        console.log(data);
+      this.getDimentions();
 
-     })
+    })
   }
 
   async getDimentions() {
-    this.dimensionService.getAll().toPromise().then((data: Array<DimensionViewModel>)=>{
+    this.dimensionService.getAll().subscribe((data: Array<DimensionViewModel>) => {
+
       this.lstDimensions = data.filter(x => x.id !== this.humansByDimensions.idDimension);
-        console.log(data);
-
-     })
+    })
   }
-
   showModalSaveTravel() {
 
     const dialogLetter = this.matDialog.open(TravelComponent, {
@@ -73,9 +69,4 @@ await this.getDimentions();
       this.getDetail();
     });
   }
-
-
-
-
-
 }

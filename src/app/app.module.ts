@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FooterComponent } from './shared/footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { RouterModule } from '@angular/router';
@@ -24,7 +23,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent,
     HomeComponent,
     HeaderComponent,
     PaginationCardsComponent,
