@@ -19,13 +19,14 @@ export class PaginationCardsComponent {
   selectedPage: number = 1;
   totalPages: number = 0;
   totalPagesArray: Array<number> = [];
+  showPages = 4;
   ngOnInit() { }
 
   startedPagination(parent: HomeComponent) {
     this.parentPage = parent;
     this.totalPages = Math.ceil(this.parentPage.listHumansByDimensions.length / 2);
     this.totalPagesArray = Array(this.totalPages).fill(this.totalPages).map((x, i) => i);
-    this.totalPagesArray = this.totalPagesArray.slice(0, 2);
+    this.totalPagesArray = this.totalPagesArray.slice(0, this.showPages);
   }
   changeClassSelectedPage(index: number): string {
     if (this.selectedPage === index) {
@@ -42,7 +43,7 @@ export class PaginationCardsComponent {
   previusPage() {
     if (this.selectedPage - 1 === this.totalPagesArray[0]) {
       this.totalPagesArray = Array(this.totalPages).fill(this.totalPages).map((x, i) => i);
-      this.totalPagesArray = this.totalPagesArray.slice(this.selectedPage - 2, this.selectedPage);
+      this.totalPagesArray = this.totalPagesArray.slice(this.selectedPage - 2, this.selectedPage + (this.showPages - 2));
     }
     this.selectedPage = this.selectedPage - 1;
     this.alterPages();
@@ -51,7 +52,7 @@ export class PaginationCardsComponent {
   nextPage() {
     if (this.selectedPage === this.totalPagesArray[this.totalPagesArray.length - 1] + 1) {
       this.totalPagesArray = Array(this.totalPages).fill(this.totalPages).map((x, i) => i);
-      this.totalPagesArray = this.totalPagesArray.slice(this.selectedPage - 1, this.selectedPage + 1);
+      this.totalPagesArray = this.totalPagesArray.slice(this.selectedPage - (this.showPages - 1), this.selectedPage + 1);
     }
     this.selectedPage = this.selectedPage + 1;
     this.alterPages();
