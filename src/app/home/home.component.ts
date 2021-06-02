@@ -29,9 +29,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.humansByDimensionsService.getByDimension(0).subscribe((data: Array<HumansByDimensionsViewModel>) => {
-
       this.listHumansByDimensions = data;
-      this.lstHumansByDimensionsPaged = this.listHumansByDimensions.slice(0, 2);
       this.paginationCardsComponent.startedPagination(this);
     })
   }

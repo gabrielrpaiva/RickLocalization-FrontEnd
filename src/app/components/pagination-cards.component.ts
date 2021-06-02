@@ -20,11 +20,14 @@ export class PaginationCardsComponent {
   totalPages: number = 0;
   totalPagesArray: Array<number> = [];
   showPages = 4;
+  registersPerPage = 2;
   ngOnInit() { }
 
   startedPagination(parent: HomeComponent) {
     this.parentPage = parent;
-    this.totalPages = Math.ceil(this.parentPage.listHumansByDimensions.length / 2);
+    this.parentPage.lstHumansByDimensionsPaged = this.parentPage.listHumansByDimensions.slice(0, this.registersPerPage);
+    this.totalPages = Math.ceil(this.parentPage.listHumansByDimensions.length / this.registersPerPage);
+
     this.totalPagesArray = Array(this.totalPages).fill(this.totalPages).map((x, i) => i);
     this.totalPagesArray = this.totalPagesArray.slice(0, this.showPages);
   }
@@ -59,10 +62,15 @@ export class PaginationCardsComponent {
   }
 
   alterPages() {
+    console.log("alterPages: ", this.selectedPage);
     this.parentPage.lstHumansByDimensionsPaged = new Array<HumansByDimensionsViewModel>();
+    let stop = 0;
     return this.parentPage.listHumansByDimensions.map((x, index) => {
-      if (index === (this.selectedPage * 2) - 2 || index === (((this.selectedPage * 2) - 1))) {
-        this.parentPage.lstHumansByDimensionsPaged.push(x);
+      if (index >= ((this.selectedPage * this.registersPerPage) - this.registersPerPage)  ) {
+         if (this.registersPerPage !== stop) {
+          this.parentPage.lstHumansByDimensionsPaged.push(x);
+          stop++;
+         }
       }
     })
   }
