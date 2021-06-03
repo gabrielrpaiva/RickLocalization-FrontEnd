@@ -15,7 +15,7 @@
     </tr>
     <tr *ngFor="let tevael of lstTravels" >
       <td>{{tevael.dimensionName}}</td>
-      <td>{{tevael.travelDate}}</td>
+      <td>{{tevael.travelDate | date: 'dd/MM/yyyy hh:mm a'}}</td>
     </tr>
 
   </table>
