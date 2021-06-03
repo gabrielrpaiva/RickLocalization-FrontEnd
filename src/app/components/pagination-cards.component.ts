@@ -62,7 +62,6 @@ export class PaginationCardsComponent {
   }
 
   alterPages() {
-    console.log("alterPages: ", this.selectedPage);
     this.parentPage.lstHumansByDimensionsPaged = new Array<HumansByDimensionsViewModel>();
     let stop = 0;
     return this.parentPage.listHumansByDimensions.map((x, index) => {
